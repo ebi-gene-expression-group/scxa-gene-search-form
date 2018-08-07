@@ -1,3 +1,3 @@
-import FetchLoader from './FetchLoader.js'
+import GeneSearchForm from './GeneSearchForm.js'
 
-export default FetchLoader
+export default GeneSearchForm
