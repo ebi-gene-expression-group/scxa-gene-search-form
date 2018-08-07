@@ -19,7 +19,7 @@ class GeneSearchForm extends React.Component {
 
     this.state = {
       // A JSON-formatted query object with two fields, term and category
-      query: defaultValue,
+      query: ``,
       selectedSpecies: props.defaultSpecies,
       enableSubmitButton: props.enableSubmitButton
     }
@@ -36,7 +36,7 @@ class GeneSearchForm extends React.Component {
         {}
     })
 
-    if (this.state.enableSubmitButton === false) {
+    if(this.state.enableSubmitButton === false) {
       this.props.onChange(JSON.parse(selectedItem.value));  
     }  
   }
@@ -44,7 +44,7 @@ class GeneSearchForm extends React.Component {
   _speciesSelectOnChange(event) {
     this.setState({ selectedSpecies: event.target.value });
 
-    if（this.state.enableSubmitButton === false) {
+    if(this.state.enableSubmitButton === false) {
       this.props.speciesSelectOnChange(event);
     }
   }
@@ -58,8 +58,9 @@ class GeneSearchForm extends React.Component {
 
     const {enableSpeciesSelect, speciesSelectClassName, speciesSelectStatusMessage} = this.props
     const {allSpecies, topSpecies} = this.props
-// 
+
     return (
+      <div>
         <form action={URI(actionEndpoint, atlasUrl).toString()} method={`post`}>
           <div className={wrapperClassName}>
             <div className={autocompleteClassName}>
@@ -81,19 +82,21 @@ class GeneSearchForm extends React.Component {
                                />
               </div>
             }
-            { enableSubmitButton &&  <div className={wrapperClassName}>
-              <div className={`small-12 columns`}>
-                <button type={`Submit`}
-                        className={`button`}
-                        disabled={!this.state.query.term || this.state.query.term.trim() === ``}>
-                        Search
-                </button>
+            </div>
+            { enableSubmitButton &&  
+              <div className={wrapperClassName}>
+                <div className={`small-12 columns`}>
+                  <button type={`Submit`}
+                          className={`button`}
+                          disabled={!this.state.query.term || this.state.query.term.trim() === ``}
+                          >
+                          Search
+                  </button>
+                </div>
               </div>
             }
-          </div>
-
-        </form>
-
+      </form>
+    </div>
     )
   }
 }

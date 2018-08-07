@@ -47,7 +47,7 @@ const _asyncFetchOptions = (atlasUrl, suggesterEndpoint, selectedSpecies, allSpe
     throw new Error(`${suggesterUrl} => ${response.status}`)
   }
 
-const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies,inputValue, allSpecies, onChange, currentValue,defaultValue}) => {
+const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies,inputValue, allSpecies, onChange,defaultValue,currentValue}) => {
   const _defaultValue = {
     label: currentValue,
     category: `q`
