@@ -12,6 +12,7 @@ const SpeciesSelect = ({statusMessage, topSpecies, allSpecies, separator, onChan
     statusMessage ?
       <select disabled={`true`}
               name={`species`}
+              value = {selectedValue}
               key={`select`}>{_option(statusMessage)}</select> :
 
       <select onChange={onChange}

@@ -20,7 +20,8 @@ class GeneSearchForm extends React.Component {
     this.state = {
       // A JSON-formatted query object with two fields, term and category
       query: defaultValue,
-      selectedSpecies: props.defaultSpecies
+      selectedSpecies: props.defaultSpecies,
+      enableSubmitButton: props.enableSubmitButton
     }
 
     this.speciesSelectOnChange = this._speciesSelectOnChange.bind(this)
@@ -28,56 +29,71 @@ class GeneSearchForm extends React.Component {
   }
 
   _autocompleteOnChange(selectedItem) {
+   // console.log('selectedItem',JSON.parse(selectedItem.value));
     this.setState({
       query: selectedItem ?
         JSON.parse(selectedItem.value) :
         {}
     })
+
+    if (this.state.enableSubmitButton === false) {
+      this.props.onChange(JSON.parse(selectedItem.value));  
+    }  
   }
 
   _speciesSelectOnChange(event) {
-    this.setState({ selectedSpecies: event.target.value })
+    this.setState({ selectedSpecies: event.target.value });
+
+    if（this.state.enableSubmitButton === false) {
+      this.props.speciesSelectOnChange(event);
+    }
   }
 
   render() {
     const {wrapperClassName, actionEndpoint} = this.props
 
-    const {autocompleteClassName, atlasUrl, suggesterEndpoint, defaultValue} = this.props
+    const {enableSubmitButton} = this.props
+
+    const {autocompleteClassName, atlasUrl, suggesterEndpoint, defaultValue, currentValue, currentSpecies} = this.props
 
     const {enableSpeciesSelect, speciesSelectClassName, speciesSelectStatusMessage} = this.props
     const {allSpecies, topSpecies} = this.props
-
+// 
     return (
-      <form action={URI(actionEndpoint, atlasUrl).toString()} method={`post`}>
-        <div className={wrapperClassName}>
-          <div className={autocompleteClassName}>
-            <Autocomplete atlasUrl={atlasUrl}
-                          suggesterEndpoint={suggesterEndpoint}
-                          onChange={this.autocompleteOnChange}
-                          selectedSpecies={this.state.selectedSpecies}
-                          allSpecies={allSpecies}
-                          defaultValue={defaultValue}/>
-          </div>
-          { enableSpeciesSelect &&
-            <div className={speciesSelectClassName}>
-              <SpeciesSelect allSpecies={allSpecies}
-                             topSpecies={topSpecies}
-                             statusMessage={speciesSelectStatusMessage}
-                             selectedValue={this.state.selectedSpecies}
-                             onChange={this.speciesSelectOnChange}/>
+        <form action={URI(actionEndpoint, atlasUrl).toString()} method={`post`}>
+          <div className={wrapperClassName}>
+            <div className={autocompleteClassName}>
+              <Autocomplete atlasUrl={atlasUrl}
+                            suggesterEndpoint={suggesterEndpoint}
+                            onChange={this.autocompleteOnChange}
+                            selectedSpecies={this.state.selectedSpecies}
+                            allSpecies={allSpecies}
+                            defaultValue={defaultValue}
+                            currentValue={currentValue}/>
             </div>
-          }
-        </div>
-        <div className={wrapperClassName}>
-          <div className={`small-12 columns`}>
-            <button type={`Submit`}
-                    className={`button`}
-                    disabled={!this.state.query.term || this.state.query.term.trim() === ``}>
-                    Search
-            </button>
+            { enableSpeciesSelect &&
+              <div className={speciesSelectClassName}>
+                <SpeciesSelect allSpecies={allSpecies}
+                               topSpecies={topSpecies}
+                               statusMessage={speciesSelectStatusMessage}
+                               selectedValue={currentSpecies}
+                               onChange={this.speciesSelectOnChange}
+                               />
+              </div>
+            }
+            { enableSubmitButton &&  <div className={wrapperClassName}>
+              <div className={`small-12 columns`}>
+                <button type={`Submit`}
+                        className={`button`}
+                        disabled={!this.state.query.term || this.state.query.term.trim() === ``}>
+                        Search
+                </button>
+              </div>
+            }
           </div>
-        </div>
-      </form>
+
+        </form>
+
     )
   }
 }
@@ -86,6 +102,7 @@ GeneSearchForm.propTypes = {
   atlasUrl: PropTypes.string.isRequired,
   actionEndpoint: PropTypes.string.isRequired,
   wrapperClassName: PropTypes.string,
+  enableSubmitButton: PropTypes.bool.isRequired,
 
   autocompleteClassName: PropTypes.string,
   suggesterEndpoint: PropTypes.string.isRequired,

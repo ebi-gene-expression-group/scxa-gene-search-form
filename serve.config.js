@@ -12,5 +12,5 @@ module.exports.serve = {
     publicPath: `/dist/`
   },
 
-  port: 9000
+  port: 9091
 }

@@ -47,15 +47,11 @@ const _asyncFetchOptions = (atlasUrl, suggesterEndpoint, selectedSpecies, allSpe
     throw new Error(`${suggesterUrl} => ${response.status}`)
   }
 
-const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies, onChange, defaultValue}) => {
-  const _defaultValue = defaultValue.term && defaultValue.term.trim() ?
-    {
-      label: defaultValue.term.trim(),
-      value: defaultValue.category && defaultValue.category.trim() ?
-        JSON.stringify(defaultValue) :
-        JSON.stringify({term: inputValue, category: `q`})
-    } :
-    {}
+const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies,inputValue, allSpecies, onChange, currentValue,defaultValue}) => {
+  const _defaultValue = {
+    label: currentValue,
+    category: `q`
+  }
 
   return [
     <label key={`label`}>Gene ID or gene symbol</label>,
@@ -78,7 +74,8 @@ const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies,
                           // isMulti
                           name={`geneQuery`}
                           key={`autocomplete`}
-                          defaultValue={_defaultValue}/>
+                          defaultValue={_defaultValue}
+                          />
   ]
 }
 
@@ -86,6 +83,7 @@ Autocomplete.propTypes = {
   atlasUrl: PropTypes.string.isRequired,
   suggesterEndpoint: PropTypes.string.isRequired,
   selectedSpecies: PropTypes.string,
+  inputValue: PropTypes.string,
   allSpecies: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func.isRequired,
   defaultValue: PropTypes.shape({

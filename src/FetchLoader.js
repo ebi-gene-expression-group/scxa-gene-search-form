@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import URI from 'urijs'
-
 import GeneSearchForm from './GeneSearchForm'
 
 const _fetch = async (host, resource) => {
@@ -32,9 +31,14 @@ class FetchLoader extends React.Component {
       error ?
         <GeneSearchForm {...data} {...this.props} speciesSelectStatusMessage={`${error.name}: ${error.message}`}/> :
       loading ?
-        <GeneSearchForm {...data} {...this.props} speciesSelectStatusMessage={`Fetching species…`}/> :
+        <div>
+        <GeneSearchForm {...data} {...this.props} speciesSelectStatusMessage={`Fetching species…`}/> 
+       
+        </div>:
       // promise fulfilled
         <GeneSearchForm {...data} {...this.props} speciesSelectStatusMessage={``}/>
+
+      
     )
   }
 
