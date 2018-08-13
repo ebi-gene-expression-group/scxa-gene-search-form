@@ -11,17 +11,20 @@ import AsyncCreatableSelect from 'react-select/lib/AsyncCreatable'
 
 Enzyme.configure({ adapter: new Adapter() })
 
+const defaultValue = {
+  label: `foo`,
+  category: `q`
+}
+
 const props = {
   atlasUrl: `foo/`,
   actionEndpoint: `bar`,
   suggesterEndpoint: `suggest`,
-  onChange: () => {}
+  onChange: () => {},
+  currentValue: defaultValue.label,
+  defaultSpecies:`all`
 }
 
-const defaultValue = {
-  term: `foo`,
-  category: `bar`
-}
 
 const species = [
   `Meeseek`,
@@ -37,8 +40,8 @@ describe(`Autocomplete`, () => {
   test(`displays the default value`, () => {
      const wrapper = mount(<Autocomplete {...props} defaultValue={defaultValue}/>)
      expect(wrapper.find(AsyncCreatableSelect).props().defaultValue).toEqual({
-       label: defaultValue.term,
-       value: JSON.stringify(defaultValue)
+       label: defaultValue.label,
+       category: defaultValue.category 
      })
   })
 })

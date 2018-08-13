@@ -9,16 +9,20 @@ import GeneSearchForm from '../src/GeneSearchForm.js'
 
 Enzyme.configure({ adapter: new Adapter() })
 
+const defaultValue = {
+  label: `foo`,
+  category: `q`
+}
+
 const props = {
   atlasUrl: `foo/`,
   actionEndpoint: `bar`,
   suggesterEndpoint: `suggest`,
-  enableSpeciesSelect: true
-}
-
-const defaultValue = {
-  term: `foo`,
-  category: `bar`
+  enableSpeciesSelect: true,
+  enableSubmitButton: true,
+  onChange: () => {},
+  currentValue: defaultValue.label,
+  defaultSpecies:`all`
 }
 
 const species = [
@@ -43,8 +47,10 @@ describe(`GeneSearchForm`, () => {
   })
 
   test(`search button with valid default value is enabled`, () => {
-     const wrapper = mount(<GeneSearchForm {...props} defaultValue={defaultValue}/>)
-     expect(wrapper.find(`button`).at(0).props()).toHaveProperty(`disabled`, false)
+     const wrapper = mount(<GeneSearchForm {...props} defaultValue={defaultValue} />)
+     wrapper.setState({ query: { term: "ASPA", category: "symbol" } });
+     wrapper.update();
+     expect(wrapper.find(`button`).at(0).props()).toHaveProperty(`disabled`, false);
   })
 
 })

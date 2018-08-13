@@ -29,7 +29,6 @@ class GeneSearchForm extends React.Component {
   }
 
   _autocompleteOnChange(selectedItem) {
-   // console.log('selectedItem',JSON.parse(selectedItem.value));
     this.setState({
       query: selectedItem ?
         JSON.parse(selectedItem.value) :
