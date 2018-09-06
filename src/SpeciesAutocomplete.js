@@ -38,6 +38,7 @@ class SpeciesAutocomplete extends React.Component {
               value = {currentValue}
               key={`select`}>{_option(statusMessage)}</select> :
         <Select
+          key={`select`}
           value={selectedOption}
           onChange={this.handleChange}
           options={allSpecies.map(_option).concat([{value: ``, label:`Any`}])}
