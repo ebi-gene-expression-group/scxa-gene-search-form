@@ -59,7 +59,6 @@ class GeneSearchForm extends React.Component {
     const {enableSpeciesSelect, speciesSelectClassName, speciesSelectStatusMessage} = this.props
     const {allSpecies, topSpecies} = this.props
 
-    console.log(allSpecies,topSpecies);
     return (
       <div>
         <form action={URI(actionEndpoint, atlasUrl).toString()} method={`post`}>
