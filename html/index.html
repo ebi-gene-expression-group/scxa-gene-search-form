@@ -76,7 +76,8 @@
     autocompleteClassName: 'small-8 columns',
     enableSpeciesSelect: true,
     speciesEndpoint: 'json/suggestions/species',
-    speciesSelectClassName: 'small-4 columns'
+    speciesSelectClassName: 'small-4 columns',
+    enableSubmitButton: true
   }, 'search');
 
   geneSearchFormDemo.render({
@@ -99,7 +100,8 @@
     enableSpeciesSelect: false,
     speciesEndpoint: 'json/suggestions/species',
     speciesSelectClassName: 'small-4 columns',
-    defaultSpecies: 'Homo sapiens'
+    defaultSpecies: 'Homo sapiens',
+    enableSubmitButton: true
   }, 'no_species_select_human');
 
   geneSearchFormDemo.render({
@@ -115,7 +117,8 @@
     defaultValue: {
       term: 'foo',
       category: 'bar'
-    }
+    },
+    enableSubmitButton: true
   }, 'no_species_select_mouse');
 
 </script>
