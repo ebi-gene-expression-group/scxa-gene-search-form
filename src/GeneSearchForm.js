@@ -4,6 +4,7 @@ import URI from 'urijs'
 
 import Autocomplete from './Autocomplete'
 import SpeciesSelect from './SpeciesSelect'
+import SpeciesAutoComplete from './SpeciesAutoComplete'
 
 class GeneSearchForm extends React.Component {
   constructor(props) {
@@ -35,8 +36,8 @@ class GeneSearchForm extends React.Component {
     })
   }
 
-  _speciesSelectOnChange(event) {
-    this.setState({ selectedSpecies: event.target.value })
+  _speciesSelectOnChange(selectedItem) {
+    this.setState({ selectedSpecies: selectedItem });
   }
 
   render() {
@@ -46,7 +47,7 @@ class GeneSearchForm extends React.Component {
 
     const {enableSpeciesSelect, speciesSelectClassName, speciesSelectStatusMessage} = this.props
     const {allSpecies, topSpecies} = this.props
-
+console.log(this.state.selectedSpecies)
     return (
       <form action={URI(actionEndpoint, atlasUrl).toString()} method={`post`}>
         <div className={wrapperClassName}>
@@ -61,12 +62,14 @@ class GeneSearchForm extends React.Component {
           </div>
           { enableSpeciesSelect &&
             <div className={speciesSelectClassName}>
-              <SpeciesSelect
-                allSpecies={allSpecies}
-                topSpecies={topSpecies}
-                statusMessage={speciesSelectStatusMessage}
-                selectedValue={this.state.selectedSpecies}
-                onChange={this.speciesSelectOnChange}/>
+                <SpeciesAutoComplete allSpecies={allSpecies}
+                               topSpecies={topSpecies}
+                               statusMessage={speciesSelectStatusMessage}
+                               selectedValue={this.state.selectedSpecies}
+                               defaultValue={this.state.selectedSpecies}
+                               currentValue={this.state.selectedSpecies}
+                               onChange={this.speciesSelectOnChange}
+                               />
             </div>
           }
         </div>
