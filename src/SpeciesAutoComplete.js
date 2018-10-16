@@ -50,7 +50,7 @@ class SpeciesAutoComplete extends React.Component {
 }
 
   
-SpeciesAutocomplete.propTypes = {
+SpeciesAutoComplete.propTypes = {
   topSpecies: PropTypes.arrayOf(PropTypes.string),
   allSpecies: PropTypes.arrayOf(PropTypes.string),
   statusMessage: PropTypes.string.isRequired,
@@ -58,7 +58,7 @@ SpeciesAutocomplete.propTypes = {
   currentValue: PropTypes.string
 }
 
-SpeciesAutocomplete.defaultProps = {
+SpeciesAutoComplete.defaultProps = {
   topSpecies: [],
   allSpecies: [],
   selectedValue: ``
