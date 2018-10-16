@@ -4,7 +4,7 @@ import Select from 'react-select'
 import _ from 'lodash'
 
 const _option = (label) => {
-  return {value: label, label:label}
+  return {value: label, label: label}
 }
 
 
@@ -14,20 +14,20 @@ class SpeciesAutoComplete extends React.Component {
 
     this.state = {
       selectedOption: _.isEmpty(this.props.currentValue) ? 
-        {value: ``, label:`Any`} : 
-        {value:this.props.currentValue,label:this.props.currentValue},
+        {value: ``, label: `Any`} : 
+        {value: this.props.currentValue, label: this.props.currentValue},
     }
 
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(selectedOption){
-    this.setState({ selectedOption })
+    this.setState({selectedOption})
     this.props.onChange(selectedOption.value)
   }
 
   render() {
-    const {statusMessage, topSpecies, allSpecies, separator, onChange, defaultValue, currentValue} = this.props
+    const {statusMessage, allSpecies, onChange, defaultValue} = this.props
     const {selectedOption} = this.state
 
     return (
@@ -45,7 +45,7 @@ class SpeciesAutoComplete extends React.Component {
             value={selectedOption}
             onChange={this.handleChange}
             options={allSpecies.map(_option).concat([{value: ``, label: `Any`}])}
-            defaultValue={{value:selectedOption, label:selectedOption}}
+            defaultValue={{value: defaultValue, label: defaultValue}}
           />
       ]
     )
