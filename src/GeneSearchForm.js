@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import URI from 'urijs'
 
 import Autocomplete from './Autocomplete'
-import SpeciesSelect from './SpeciesSelect'
 import SpeciesAutoComplete from './SpeciesAutoComplete'
 
 class GeneSearchForm extends React.Component {
@@ -47,7 +46,7 @@ class GeneSearchForm extends React.Component {
 
     const {enableSpeciesSelect, speciesSelectClassName, speciesSelectStatusMessage} = this.props
     const {allSpecies, topSpecies} = this.props
-console.log(this.state.selectedSpecies)
+
     return (
       <form action={URI(actionEndpoint, atlasUrl).toString()} method={`post`}>
         <div className={wrapperClassName}>
