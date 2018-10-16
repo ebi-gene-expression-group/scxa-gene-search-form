@@ -22,30 +22,31 @@ class SpeciesAutoComplete extends React.Component {
   }
 
   handleChange(selectedOption){
-    this.setState({ selectedOption });
-    this.props.onChange(selectedOption.value);
+    this.setState({ selectedOption })
+    this.props.onChange(selectedOption.value)
   }
 
   render() {
-    const {statusMessage, topSpecies, allSpecies, separator, onChange, defaultValue, currentValue} = this.props;
-    const { selectedOption } = this.state;
+    const {statusMessage, topSpecies, allSpecies, separator, onChange, defaultValue, currentValue} = this.props
+    const {selectedOption} = this.state
 
     return (
       [
       <label htmlFor={`species`} key={`label`}>Species</label>,
-      // statusMessage ?       
-      //   <select disabled={`true`}
-      //         name={`species`}
-      //         value = {selectedOption}
-      //         key={`select`}>{_option(statusMessage)}</select> 
-      //   :
-        <Select
-          key={`select`}
-          value={selectedOption}
-          onChange={this.handleChange}
-          options={allSpecies.map(_option).concat([{value: ``, label:`Any`}])}
-          defaultValue={{value:selectedOption, label:selectedOption}}
-        />
+       statusMessage ?       
+         <Select disabled={`true`}
+              name={`species`}
+              value={statusMessage}
+              key={`select`}
+          /> :
+          <Select
+            key={`select`}
+            name={`species`}
+            value={selectedOption}
+            onChange={this.handleChange}
+            options={allSpecies.map(_option).concat([{value: ``, label: `Any`}])}
+            defaultValue={{value:selectedOption, label:selectedOption}}
+          />
       ]
     )
   }
