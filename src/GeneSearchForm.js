@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import URI from 'urijs'
 
 import Autocomplete from './Autocomplete'
-import SpeciesAutoComplete from './SpeciesAutoComplete'
+import SpeciesSelect from './SpeciesSelect'
 
 class GeneSearchForm extends React.Component {
   constructor(props) {
@@ -61,7 +61,7 @@ class GeneSearchForm extends React.Component {
           </div>
           { enableSpeciesSelect &&
             <div className={speciesSelectClassName}>
-                <SpeciesAutoComplete allSpecies={allSpecies}
+                <SpeciesSelect allSpecies={allSpecies}
                                statusMessage={speciesSelectStatusMessage}
                                selectedValue={this.state.selectedSpecies}
                                defaultValue={defaultSpecies}

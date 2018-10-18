@@ -9,7 +9,7 @@ const _option = (label) => {
   return {value: label, label: label}
 }
 
-class SpeciesAutoComplete extends React.Component {
+class SpeciesSelect extends React.Component {
    constructor(props) {
     super(props)
 
@@ -57,7 +57,7 @@ class SpeciesAutoComplete extends React.Component {
 }
 
 
-SpeciesAutoComplete.propTypes = {
+SpeciesSelect.propTypes = {
   topSpecies: PropTypes.arrayOf(PropTypes.string),
   allSpecies: PropTypes.arrayOf(PropTypes.string),
   statusMessage: PropTypes.string.isRequired,
@@ -65,10 +65,10 @@ SpeciesAutoComplete.propTypes = {
   currentValue: PropTypes.string
 }
 
-SpeciesAutoComplete.defaultProps = {
+SpeciesSelect.defaultProps = {
   topSpecies: [],
   allSpecies: [],
   selectedValue: ``
 }
 
-export default SpeciesAutoComplete
+export default SpeciesSelect
