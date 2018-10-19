@@ -27,7 +27,7 @@ const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies,
         JSON.stringify(defaultValue) :
         JSON.stringify({term: defaultValue.term.trim(), category: `q`})
     } :
-    {}
+    null
 
   return [
     <label key={`label`} htmlFor={`geneQuery`}>Gene ID or gene symbol</label>,
@@ -39,7 +39,6 @@ const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies,
       onChange={onChange}
       loadOptions={_asyncFetchOptions(atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies)}
       noOptionsMessage={() => null}
-      defaultOptions
       allowCreateWhileLoading={true}
       isClearable={true}
       createOptionPosition={`first`}
