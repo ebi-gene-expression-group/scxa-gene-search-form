@@ -24,7 +24,7 @@ class FetchLoader extends React.Component {
       loading ?
         <GeneSearchForm {...data} {...this.props} speciesSelectStatusMessage={`Fetching species…`}/> :
       // promise fulfilled
-        <GeneSearchForm {...data} {...this.props} speciesSelectStatusMessage={``}/>
+        <GeneSearchForm {...data} {...this.props} />
     )
   }
 

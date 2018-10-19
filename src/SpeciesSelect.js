@@ -60,7 +60,7 @@ class SpeciesSelect extends React.Component {
 SpeciesSelect.propTypes = {
   topSpecies: PropTypes.arrayOf(PropTypes.string),
   allSpecies: PropTypes.arrayOf(PropTypes.string),
-  statusMessage: PropTypes.string.isRequired,
+  statusMessage: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   currentValue: PropTypes.string
 }

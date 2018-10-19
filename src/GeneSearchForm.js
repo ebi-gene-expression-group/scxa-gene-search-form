@@ -115,7 +115,6 @@ GeneSearchForm.defaultProps = {
   allSpecies: [],
   topSpecies: [],
   defaultSpecies: ``,
-  speciesSelectStatusMessage: ``
 }
 
 export default GeneSearchForm
