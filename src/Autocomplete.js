@@ -30,8 +30,10 @@ const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies,
     {}
 
   return [
-    <label key={`label`}>Gene ID or gene symbol</label>,
+    <label key={`label`} htmlFor={`geneQuery`}>Gene ID or gene symbol</label>,
     <AsyncCreatableSelect
+      key={`autocomplete`}
+      name={`geneQuery`}
       components={{ DropdownIndicator: null, IndicatorSeparator: null }}
       styles={ebiVfReactSelectReplacements.styles}
       onChange={onChange}
@@ -48,9 +50,6 @@ const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies,
         value: JSON.stringify({term: inputValue, category: `q`})
       })}
       placeholder={``}
-      // isMulti
-      name={`geneQuery`}
-      key={`autocomplete`}
       defaultValue={_defaultValue}/>
   ]
 }
