@@ -36,13 +36,13 @@ class GeneSearchForm extends React.Component {
   }
 
   _speciesSelectOnChange(selectedItem) {
-    this.setState({ selectedSpecies: selectedItem })
+    this.setState({ selectedSpecies: selectedItem.value })
   }
 
   render() {
     const {wrapperClassName, actionEndpoint} = this.props
 
-    const {autocompleteClassName, atlasUrl, suggesterEndpoint, defaultValue, defaultSpecies} = this.props
+    const {autocompleteClassName, atlasUrl, suggesterEndpoint, defaultValue} = this.props
 
     const {enableSpeciesSelect, speciesSelectClassName, speciesSelectStatusMessage} = this.props
     const {allSpecies, topSpecies} = this.props
@@ -61,12 +61,12 @@ class GeneSearchForm extends React.Component {
           </div>
           { enableSpeciesSelect &&
             <div className={speciesSelectClassName}>
-                <SpeciesSelect allSpecies={allSpecies}
-                               statusMessage={speciesSelectStatusMessage}
-                               selectedValue={this.state.selectedSpecies}
-                               defaultValue={defaultSpecies}
-                               onChange={this.speciesSelectOnChange}
-                               />
+              <SpeciesSelect
+                topSpecies={topSpecies}
+                allSpecies={allSpecies}
+                statusMessage={speciesSelectStatusMessage}
+                selectedSpecies={this.state.selectedSpecies}
+                onChange={this.speciesSelectOnChange}/>
             </div>
           }
         </div>
@@ -76,7 +76,7 @@ class GeneSearchForm extends React.Component {
               type={`Submit`}
               className={`button`}
               disabled={!this.state.query.term || this.state.query.term.trim() === ``}>
-                    Search
+                Search
             </button>
           </div>
         </div>
