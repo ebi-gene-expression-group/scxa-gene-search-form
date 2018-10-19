@@ -6,7 +6,8 @@
   "scripts": {
     "dist": "NODE_ENV=production webpack --optimize-minimize",
     "prepack": "rm -rf lib && babel src -d lib --copy-files",
-    "test": "jest --coverage --verbose",
+    "testOnly": "jest --coverage --verbose",
+    "test": "npm run testOnly",
     "posttest": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "postversion": "npm publish",
     "postpublish": "git push && git push --tags"
@@ -33,7 +34,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-select": "^2.0.0",
+    "react-select": "^2.1.0",
+    "styled-components": "^4.0.2",
     "urijs": "^1.19.1"
   },
   "devDependencies": {
@@ -55,7 +57,7 @@
     "jest": "^23.4.1",
     "react-test-renderer": "^16.4.1",
     "webpack": "^4.16.2",
-    "webpack-command": "^0.4.1",
-    "webpack-serve": "^2.0.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   }
 }

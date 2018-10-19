@@ -1,8 +1,12 @@
+const path = require(`path`)
 const CleanWebpackPlugin = require(`clean-webpack-plugin`)
+
+const commonPublicPath = `/dist/`
 
 module.exports = {
   entry: {
     geneSearchFormDemo: [`babel-polyfill`, `./html/render.js`],
+    speciesSelectDemo: `./html/speciesSelectDemo.js`
   },
 
   plugins: [
@@ -11,23 +15,17 @@ module.exports = {
 
   output: {
     library: `[name]`,
-    filename: `[name].bundle.js`
+    filename: `[name].bundle.js`,
+    publicPath: commonPublicPath
   },
 
   optimization: {
     splitChunks: {
-      chunks: `all`,
-      minSize: 1,
       cacheGroups: {
-        facetedSearch: {
-          test: /[\\/]src[\\/]/,
-          name: `geneSearchForm`,
-          priority: -20
-        },
-        vendors: {
+        commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: `vendors`,
-          priority: -10
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }
@@ -41,5 +39,11 @@ module.exports = {
         use: `babel-loader`
       }
     ]
+  },
+
+  devServer: {
+    port: 9000,
+    contentBase: path.resolve(__dirname, `html`),
+    publicPath: commonPublicPath
   }
 }
