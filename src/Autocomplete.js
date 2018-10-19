@@ -14,8 +14,7 @@ const _asyncFetchOptions = (atlasUrl, suggesterEndpoint, selectedSpecies, allSpe
 
     const response = await fetch(suggesterUrl)
     if (response.ok) {
-      const json = await response.json()
-      return json
+      return await response.json()
     }
     throw new Error(`${suggesterUrl} => ${response.status}`)
   }
