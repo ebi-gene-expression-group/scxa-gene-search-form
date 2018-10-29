@@ -4,40 +4,60 @@ import Select from 'react-select'
 
 import ebiVfReactSelectReplacements from './ebiVfReactSelectReplacements'
 
-const ANY_SPECIES = {
-  value: ``,
-  label: `Any`
+const _makeOption = (str) => {
+  if (str === ``) {
+    return {
+      value: ``,
+      label: `Any`
+    }
+  }
+
+  return {
+    value: str.trim(),
+    label: str.trim()
+  }
 }
 
-const _makeOption = (str) => ({
-  value: str.trim(),
-  label: str.trim()
-})
+const _onlyUnique = (value, index, self) => self.indexOf(value) === index
 
 const SpeciesSelect = ({topSpecies, allSpecies, statusMessage, onChange, selectedSpecies}) => {
+  const topOptions = topSpecies.map(_makeOption)
+
+  const allOptions =
+    allSpecies
+      .concat(``)
+      .map(str => str.trim())
+      .filter(_onlyUnique)
+      .sort()
+      .map(_makeOption)
+
   const options =
-    topSpecies.map(_makeOption).concat(
-      [{
+    topOptions
+      .concat([{
         label: Math.random() < 0.9999 ? `All species` : `(╯°□°）╯︵ ┻━┻`,
-        options: [ANY_SPECIES].concat(allSpecies.map(_makeOption))
+        options: allOptions
       }])
 
-  const selectedValue = selectedSpecies.trim() === `` ? ANY_SPECIES : _makeOption(selectedSpecies)
+  const selectedValue =
+    topOptions
+      .concat(allOptions)
+      .find(option => option.value === selectedSpecies.trim()) || allOptions[0]
 
-  return [
-    <label  key={`label`} htmlFor={`species`}>Species</label>,
-    <Select
-      key={`select`}
-      name={`species`}
-      components={{ IndicatorSeparator: null, DropdownIndicator: ebiVfReactSelectReplacements.DropdownIndicator }}
-      styles={ebiVfReactSelectReplacements.styles}
-      isSearchable={false}
-      onChange={onChange}
-      options={options}
-      isDisabled={Boolean(statusMessage)}
-      placeholder={statusMessage}
-      defaultValue={statusMessage ? null : selectedValue} />
-  ]
+  return (
+    <div>
+      <label  key={`label`} htmlFor={`species`}>Species</label>,
+      <Select
+        key={`select`}
+        name={`species`}
+        components={{ IndicatorSeparator: null, DropdownIndicator: ebiVfReactSelectReplacements.DropdownIndicator }}
+        styles={ebiVfReactSelectReplacements.styles}
+        isSearchable={false}
+        onChange={onChange}
+        options={options}
+        isDisabled={Boolean(statusMessage)}
+        defaultValue={Boolean(statusMessage) ? null : selectedValue} />
+    </div>
+  )
 }
 
 SpeciesSelect.propTypes = {
@@ -51,6 +71,7 @@ SpeciesSelect.propTypes = {
 SpeciesSelect.defaultProps = {
   topSpecies: [],
   allSpecies: [],
+  statusMessage: ``,
   selectedSpecies: ``
 }
 
