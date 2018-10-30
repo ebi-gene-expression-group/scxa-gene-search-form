@@ -2,10 +2,11 @@ const path = require(`path`)
 const CleanWebpackPlugin = require(`clean-webpack-plugin`)
 
 const commonPublicPath = `/dist/`
+const vendorsBundleName = `vendors`
 
 module.exports = {
   entry: {
-    geneSearchFormDemo: [`babel-polyfill`, `./html/render.js`],
+    geneSearchFormDemo: [`@babel/polyfill`, `./html/render.js`],
     speciesSelectDemo: `./html/speciesSelectDemo.js`
   },
 
@@ -20,11 +21,14 @@ module.exports = {
   },
 
   optimization: {
+    runtimeChunk: {
+       name: vendorsBundleName
+    },
     splitChunks: {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+          name: vendorsBundleName,
           chunks: 'all'
         }
       }
