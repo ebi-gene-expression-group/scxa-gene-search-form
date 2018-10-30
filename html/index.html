@@ -83,21 +83,38 @@
 <script src="../dist/geneSearchFormDemo.bundle.js"></script>
 
 <script>
+  var allSpecies = [
+    `Meeseek`,
+    `Gromflomite`,
+    `Cromulon`,
+    `Zigerion`,
+    `Moopian`,
+    `Bliznarvian`,
+    `Greebybobe`
+  ];
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  };
+
   speciesSelectDemo.render({
-    topSpecies: ['foo'],
-    allSpecies: ['foo', 'bar'],
+    topSpecies: allSpecies.filter(function() {return Math.random() > 0.5}),
+    allSpecies: allSpecies,
+    onChange: function() {}
   }, 'select');
 
   speciesSelectDemo.render({
-    topSpecies: ['foo'],
-    allSpecies: ['foo', 'bar'],
-    selectedSpecies: 'foo'
+    topSpecies: allSpecies.filter(function() {return Math.random() > 0.5}),
+    allSpecies: allSpecies,
+    selectedSpecies: allSpecies[getRandomInt(allSpecies.length)],
+    onChange: function() {}
   }, 'select-with-default-value');
 
   speciesSelectDemo.render({
-    topSpecies: ['foo'],
-    allSpecies: ['foo', 'bar'],
-    statusMessage: `An error occurred somewhere along the InterWebz pipes!`,
+    topSpecies: allSpecies.filter(function() {return Math.random() > 0.5}),
+    allSpecies: allSpecies,
+    statusMessage:'An error occurred somewhere along the InterWebz pipes!',
+    onChange: function() {}
   }, 'select-error');
 
   geneSearchFormDemo.render({
