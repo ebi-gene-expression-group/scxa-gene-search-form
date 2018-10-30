@@ -29,28 +29,30 @@ const Autocomplete = ({atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies,
     } :
     null
 
-  return [
-    <label key={`label`} htmlFor={`geneQuery`}>Gene ID or gene symbol</label>,
-    <AsyncCreatableSelect
-      key={`autocomplete`}
-      name={`geneQuery`}
-      components={{ DropdownIndicator: null, IndicatorSeparator: null }}
-      styles={ebiVfReactSelectReplacements.styles}
-      onChange={onChange}
-      loadOptions={_asyncFetchOptions(atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies)}
-      noOptionsMessage={() => null}
-      allowCreateWhileLoading={true}
-      isClearable={true}
-      createOptionPosition={`first`}
-      formatCreateLabel={(inputValue) => inputValue}
-      isValidNewOption={(inputValue) => inputValue.trim() !== ``}
-      getNewOptionData={(inputValue) => ({
-        label: inputValue,
-        value: JSON.stringify({term: inputValue, category: `q`})
-      })}
-      placeholder={``}
-      defaultValue={_defaultValue}/>
-  ]
+  return (
+    <div>
+      <label key={`label`} htmlFor={`geneQuery`}>Gene ID or gene symbol</label>,
+      <AsyncCreatableSelect
+        key={`autocomplete`}
+        name={`geneQuery`}
+        components={{ DropdownIndicator: null, IndicatorSeparator: null }}
+        styles={ebiVfReactSelectReplacements.styles}
+        onChange={onChange}
+        loadOptions={_asyncFetchOptions(atlasUrl, suggesterEndpoint, selectedSpecies, allSpecies)}
+        noOptionsMessage={() => null}
+        allowCreateWhileLoading={true}
+        isClearable={true}
+        createOptionPosition={`first`}
+        formatCreateLabel={(inputValue) => inputValue}
+        isValidNewOption={(inputValue) => inputValue.trim() !== ``}
+        getNewOptionData={(inputValue) => ({
+          label: inputValue,
+          value: JSON.stringify({term: inputValue, category: `q`})
+        })}
+        placeholder={``}
+        defaultValue={_defaultValue}/>
+    </div>
+  )
 }
 
 Autocomplete.propTypes = {
