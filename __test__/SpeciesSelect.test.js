@@ -38,9 +38,11 @@ describe(`SpeciesSelect`, () => {
     expect(wrapper.last().find(Select)).toHaveLength(1)
   })
 
-  test(`is disabled when a statusMessage (i.e. an error message) is passed in`, () => {
-     const wrapper = shallow(<SpeciesSelect { ...props } statusMessage={`Any schwifty, non-empty string`} />)
-     expect(wrapper.find(Select).prop(`isDisabled`)).toEqual(true)
+  test(`is disabled when a statusMessage (i.e. an error message) is passed in and it is displayed`, () => {
+    const errorMessage = `Any schwifty, non-empty string`
+    const wrapper = shallow(<SpeciesSelect { ...props } statusMessage={errorMessage} />)
+    expect(wrapper.find(Select).prop(`isDisabled`)).toEqual(true)
+    expect(wrapper.find(Select).prop(`placeholder`)).toEqual(errorMessage)
   })
 
   test(`is enabled when statusMessage is null`, () => {

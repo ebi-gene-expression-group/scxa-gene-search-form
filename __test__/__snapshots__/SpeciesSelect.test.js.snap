@@ -7,7 +7,6 @@ exports[`SpeciesSelect matches snapshot 1`] = `
   >
     Species
   </label>
-  ,
   <div
     className="css-10nd86i"
     onKeyDown={[Function]}

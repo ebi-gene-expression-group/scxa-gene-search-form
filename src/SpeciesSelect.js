@@ -55,7 +55,8 @@ const SpeciesSelect = ({topSpecies, allSpecies, statusMessage, onChange, selecte
         onChange={onChange}
         options={options}
         isDisabled={Boolean(statusMessage)}
-        defaultValue={Boolean(statusMessage) ? null : selectedValue} />
+        defaultValue={Boolean(statusMessage) ? null : selectedValue}
+        placeholder={Boolean(statusMessage) ? statusMessage : null} />
     </div>
   )
 }
