@@ -45,7 +45,7 @@ const SpeciesSelect = ({topSpecies, allSpecies, statusMessage, onChange, selecte
 
   return (
     <div>
-      <label  key={`label`} htmlFor={`species`}>Species</label>,
+      <label  key={`label`} htmlFor={`species`}>Species</label>
       <Select
         key={`select`}
         name={`species`}
