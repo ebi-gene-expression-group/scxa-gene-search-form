@@ -32,7 +32,7 @@ const props = {
 
 describe(`SpeciesSelect`, () => {
   test(`is made up of a label and a React Select component`, () => {
-    const wrapper = shallow(<SpeciesSelect { ...props } />)
+    const wrapper = shallow(<SpeciesSelect {...props} />)
     expect(wrapper.first().find(`label`)).toHaveLength(1)
     expect(wrapper.first().find(`label`).text()).toEqual(`Species`)
     expect(wrapper.last().find(Select)).toHaveLength(1)
@@ -40,37 +40,37 @@ describe(`SpeciesSelect`, () => {
 
   test(`is disabled when a statusMessage (i.e. an error message) is passed in and it is displayed`, () => {
     const errorMessage = `Any schwifty, non-empty string`
-    const wrapper = shallow(<SpeciesSelect { ...props } statusMessage={errorMessage} />)
+    const wrapper = shallow(<SpeciesSelect {...props} statusMessage={errorMessage} />)
     expect(wrapper.find(Select).prop(`isDisabled`)).toEqual(true)
     expect(wrapper.find(Select).prop(`placeholder`)).toEqual(errorMessage)
   })
 
   test(`is enabled when statusMessage is null`, () => {
-    const wrapper = shallow(<SpeciesSelect { ...props } />)
+    const wrapper = shallow(<SpeciesSelect {...props} />)
     expect(wrapper.find(Select).prop(`isDisabled`)).toEqual(false)
   })
 
   test(`selects Any species by default`, () => {
-    const wrapper = shallow(<SpeciesSelect { ...props } />)
+    const wrapper = shallow(<SpeciesSelect {...props} />)
     expect(wrapper.find(Select).prop(`defaultValue`)).toHaveProperty(`value`, ``)
     expect(wrapper.find(Select).prop(`defaultValue`)).toHaveProperty(`label`, `Any`)
   })
 
   test(`preselects the selectedSpecies prop`, () => {
     const selectedSpecies = props.allSpecies[getRandomInt(props.allSpecies.length)]
-    const wrapper = shallow(<SpeciesSelect { ...props } selectedSpecies={selectedSpecies}/>)
+    const wrapper = shallow(<SpeciesSelect {...props} selectedSpecies={selectedSpecies}/>)
     expect(wrapper.find(Select).prop(`defaultValue`)).toHaveProperty(`value`, selectedSpecies)
   })
 
   test(`selects Any if selecetdSpecies doesn’t match any in topSpecies or allSpecies`, () => {
-    const wrapper = shallow(<SpeciesSelect { ...props } selectedSpecies={`Human`}/>)
+    const wrapper = shallow(<SpeciesSelect {...props} selectedSpecies={`Human`}/>)
     expect(wrapper.find(Select).prop(`defaultValue`)).toHaveProperty(`value`, ``)
     expect(wrapper.find(Select).prop(`defaultValue`)).toHaveProperty(`label`, `Any`)
   })
 
   test(`top species may not be included in all species`, () => {
     const topSpecies = [`Human`]
-    const wrapper = shallow(<SpeciesSelect { ...props } topSpecies={topSpecies}/>)
+    const wrapper = shallow(<SpeciesSelect {...props} topSpecies={topSpecies}/>)
 
     // allSpecies group is the one which has an options property instead of a value one
     const allSpeciesGroup = wrapper.find(Select).prop(`options`).find(obj => Boolean(obj.options))
@@ -88,7 +88,7 @@ describe(`SpeciesSelect`, () => {
 
   test(`changing the value in the React Select component fires the onChange prop function`, () => {
     const onChangeMock = jest.fn()
-    const wrapper = shallow(<SpeciesSelect { ...props } onChange={onChangeMock} />)
+    const wrapper = shallow(<SpeciesSelect {...props} onChange={onChangeMock} />)
 
     const speciesToSelect = props.allSpecies[getRandomInt(props.allSpecies.length)]
     wrapper.find(Select).simulate(`change`, { value: speciesToSelect, label: speciesToSelect })

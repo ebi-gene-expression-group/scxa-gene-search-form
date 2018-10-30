@@ -64,7 +64,7 @@ Autocomplete.propTypes = {
   defaultValue: PropTypes.shape({
     term: PropTypes.string,
     category: PropTypes.string
-  }),
+  })
 }
 
 Autocomplete.defaultProps = {
