@@ -167,6 +167,7 @@ exports[`GeneSearchForm matches snapshot 1`] = `
       <button
         className="button"
         disabled={true}
+        onClick={null}
         type="Submit"
       >
         Search

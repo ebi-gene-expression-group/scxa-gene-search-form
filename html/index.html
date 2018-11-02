@@ -154,7 +154,7 @@
     atlasUrl: 'http://localhost:8080/gxa/sc/',
     wrapperClassName: 'row expanded',
     actionEndpoint: 'search',
-    onSubmit: function(event) {event.preventDefault() ; console.log(event);},
+    onSubmit: function(event, query, species) {event.preventDefault() ; console.log(event); console.log(query); console.log(species);},
     suggesterEndpoint: 'json/suggestions/gene_ids',
     autocompleteClassName: 'small-8 columns',
     enableSpeciesSelect: true,

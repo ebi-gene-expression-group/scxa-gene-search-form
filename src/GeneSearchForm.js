@@ -78,7 +78,11 @@ class GeneSearchForm extends React.Component {
               type={`Submit`}
               className={`button`}
               disabled={!this.state.query.term || this.state.query.term.trim() === ``}
-              onClick={onSubmit}>
+              onClick={onSubmit ?
+                (event) => {
+                  onSubmit(event, this.state.query, this.state.selectedSpecies)
+                } :
+                null}>
                 Search
             </button>
           </div>
