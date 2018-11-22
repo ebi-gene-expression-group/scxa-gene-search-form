@@ -21,7 +21,8 @@
       "<rootDir>/__mocks__/requestAnimationFrame.js"
     ],
     "coveragePathIgnorePatterns": [
-      "src/ebiVfReactSelectReplacements"
+      "<rootDir>/src/ebiVfReactSelectReplacements",
+      "<rootDir>/__test__/utils"
     ]
   },
   "author": "Expression Atlas developers <atlas-developers@ebi.ac.uk>",
