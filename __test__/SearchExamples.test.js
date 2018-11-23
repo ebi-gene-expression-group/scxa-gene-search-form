@@ -10,8 +10,6 @@ import searchExamples from './utils/searchExamples'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max))
-
 const props = {
   links: searchExamples.filter(() => Math.random() > 0.5)
 }
